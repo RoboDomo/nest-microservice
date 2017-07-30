@@ -18,7 +18,7 @@ function ctof(c) {
 class NestHost extends HostBase {
     constructor(structure, thermostat) {
         try {
-            super(process.env.MQTT_HOST, topicRoot + '/' + structure.name + '/' + thermostat.name_long)
+            super(mqttHost, topicRoot + '/' + structure.name + '/' + thermostat.name_long)
 
             console.log('new NestHost', structure.name, thermostat.name)
             this.weather = structure.postal_code

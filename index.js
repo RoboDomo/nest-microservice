@@ -30,7 +30,6 @@ class NestHost extends HostBase {
     }
 
     async command(setting, value) {
-        debugger
         const id  = this.state.device_id,
               uri = `https://developer-api.nest.com/devices/thermostats/${id}?auth=${this.auth}`
 

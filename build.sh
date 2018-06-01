@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t autodomo/nest-microservice .
+docker build -t robodomo/nest-microservice .

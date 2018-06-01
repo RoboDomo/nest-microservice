@@ -9,23 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/autodomo/nest-microservice.git"
+    "url": "git+https://github.com/robodomo/nest-microservice.git"
   },
   "keywords": [
     "MQTT",
     "Nest",
-    "autodomo"
+    "robodomo"
   ],
   "author": "Michael Schwartz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/autodomo/nest-microservice/issues"
+    "url": "https://github.com/robodomo/nest-microservice/issues"
   },
-  "homepage": "https://github.com/autodomo/nest-microservice#readme",
+  "homepage": "https://github.com/robodomo/nest-microservice#readme",
   "dependencies": {
-    "debug": "^2.6.8",
+    "debug": "^2.6.9",
     "eventsource": "^1.0.5",
-    "microservice-core": "github:autodomo/microservice-core",
-    "superagent": "^3.5.2"
+    "microservice-core": "github:robodomo/microservice-core",
+    "superagent": "^3.8.2"
   }
 }

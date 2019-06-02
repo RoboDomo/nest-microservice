@@ -1,6 +1,7 @@
 process.env.DEBUG = "ThermostatHost,HostBase";
 
 const debug = require("debug")("ThermostatHost"),
+  console = require("console"),
   request = require("superagent"),
   EventSource = require("eventsource"),
   HostBase = require("microservice-core/HostBase");
@@ -18,8 +19,11 @@ class ThermostatHost extends HostBase {
       mqttHost,
       topicRoot + "/" + structure.name + "/" + thermostat.name_long
     );
+    this.dying = false;
     try {
       console.log("new ThermostatHost", structure.name, thermostat.name);
+      this.structure = structure;
+      this.thermostat = thermostat;
       this.weather = structure.postal_code;
       this.auth = auth;
     } catch (e) {
@@ -33,7 +37,7 @@ class ThermostatHost extends HostBase {
         this.auth
       }`;
 
-    debug(this.device, setting, value);
+    debug(`${this.thermostat.name}, setting "${setting}" => "${value}"`);
 
     const o = {};
     // Nest API is picky about numbers being JSON encoded as Numbers.
@@ -45,6 +49,7 @@ class ThermostatHost extends HostBase {
         .send(o)
         .end((error, result) => {
           if (error) {
+            console.log("error", error);
             return reject(error.response.body);
           } else {
             return resolve(JSON.parse(result.text));
@@ -70,7 +75,7 @@ async function connect() {
   );
 
   eventSource.addEventListener("put", async e => {
-    console.log("GOT EVENT", e);
+    //    console.log("GOT EVENT", e);
     const state = (this.raw = JSON.parse(e.data).data),
       devices = state.devices;
 
@@ -120,9 +125,12 @@ async function connect() {
 
   eventSource.addEventListener("error", e => {
     debug("eventsource error", e);
-    setTimeout(() => {
-      process.exit(0);
-    }, 2000);
+    if (!this.dying) {
+      this.dying = true;
+      setTimeout(() => {
+        process.exit(0);
+      }, 2000);
+    }
   });
 }
 

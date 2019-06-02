@@ -65,10 +65,12 @@ const hosts = {};
 
 async function connect() {
   const eventSource = new EventSource(
-    "https://developer-api.nest.com?auth=" + auth
+    "https://developer-api.nest.com?auth=" + auth,
+    { headers: { Authorizaton: "Bearer " + auth } }
   );
 
   eventSource.addEventListener("put", async e => {
+    console.log("GOT EVENT", e);
     const state = (this.raw = JSON.parse(e.data).data),
       devices = state.devices;
 
@@ -118,6 +120,9 @@ async function connect() {
 
   eventSource.addEventListener("error", e => {
     debug("eventsource error", e);
+    setTimeout(() => {
+      process.exit(0);
+    }, 2000);
   });
 }
 

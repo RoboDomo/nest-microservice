@@ -1,4 +1,5 @@
 process.env.DEBUG = "ThermostatHost,HostBase";
+process.title = process.env.TITLE || "nest-microservice";
 
 const debug = require("debug")("ThermostatHost"),
   console = require("console"),

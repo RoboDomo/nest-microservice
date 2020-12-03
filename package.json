@@ -4,7 +4,7 @@
   "description": "MQTT microservice for Nest thermostat",
   "main": "index.js",
   "scripts": {
-    "start": "forever ./index.js",
+    "start": "forever --watch ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "dependencies": {
     "debug": "^2.6.9",
     "eventsource": "^1.0.5",
+    "forever": "^3.0.4",
     "microservice-core": "github:robodomo/microservice-core",
     "superagent": "^3.8.2"
   }

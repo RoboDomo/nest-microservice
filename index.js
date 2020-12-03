@@ -1,4 +1,6 @@
 process.env.DEBUG = "ThermostatHost,HostBase";
+process.title = process.env.TITLE || "nest-microservice";
+
 
 const debug = require("debug")("ThermostatHost"),
   request = require("superagent"),
@@ -58,7 +60,9 @@ class ProtectHost extends HostBase {
   constructor(structure, protect) {
     super(mqttHost, topicRoot + "/" + structure.name + "/" + protect.name_long);
   }
-  async command() {}
+  async command(setting, value) {
+    console.log("protect", setting, value);
+  }
 }
 
 const hosts = {};

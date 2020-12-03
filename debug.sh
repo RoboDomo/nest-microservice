@@ -4,4 +4,4 @@
 docker run \
     --rm \
     --name="nest-microservice" \
-    nest-microservice
+    robodomo/nest-microservice

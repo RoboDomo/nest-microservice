@@ -9,7 +9,7 @@ const debug = require("debug")("ThermostatHost"),
 
 const auth = process.env.NEST_AUTH,
   topicRoot = process.env.TOPIC_ROOT || "nest",
-  mqttHost = process.env.MQTT_HOST || "mqtt://ha";
+  mqttHost = process.env.MQTT_HOST || "mqtt://mqtt";
 
 /**
  * Thermostat
